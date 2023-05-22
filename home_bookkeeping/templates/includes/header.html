@@ -1,0 +1,43 @@
+<!-- templates/includes/header.html -->
+{% load static %}
+<nav class="navbar navbar-light" style="background-color: lightskyblue">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'accounts:index' %}">
+        <img src="{% static 'img/logo.png' %}" 
+          width="30" height="30" class="d-inline-block align-top" alt="">
+        Домашная бухгалтерия
+      </a>
+      {% with request.resolver_match.view_name as view_name %} 
+      <ul class="nav nav-pills">
+        {% if request.user.is_authenticated %}
+        {% if view_name  == 'accounts:accounting_detail' %}
+        <li class="nav-item">
+          <a class="nav-link {% if view_name  == 'accounts:accounting_detail' %}active{% endif %}"  
+             href="{% url 'accounts:accounting' %}">Вернуться на главную страницу</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link {% if view_name  == 'accounts:accounting' %}active{% endif %}"  
+             href="{% url 'accounts:accounting' %}">Бухгалтерия</a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link link-light" href="{% url 'users:logout' %}">Выйти</a>
+        </li>
+        <li>
+          Пользователь: {{ user.username }}
+        </li>
+        {% else %}
+        <li class="nav-item"> 
+          <a class="nav-link link-light {% if view_name  == 'users:login' %}active{% endif %}" 
+             href="{% url 'users:login' %}">Войти</a>
+        </li>
+        <li class="nav-item"> 
+          <a class="nav-link link-light {% if view_name  == 'users:signup' %}active{% endif %}" 
+             href="{% url 'users:signup' %}">Регистрация</a>
+        </li>
+        {% endif %}
+        {% endwith %}
+      </ul>
+    </div>
+  </nav> 

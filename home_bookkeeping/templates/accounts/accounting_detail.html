@@ -1,0 +1,89 @@
+<!-- templates/accounts/accounting_detail.html -->
+{% extends 'base.html' %}
+{% block title %}Домашняя бухгалтерия{% endblock %}
+{% block content %}
+  <h1 class="text-center">Домашняя бухгалтерия</h1>
+  <hr>
+  <!-- График -->
+  <h2 class="text-center">Год: {{ accounting.year }} Месяц: {{ accounting.month }}</h2>
+  {% if chart %}
+    <div class="text-center">
+      <img src="data:image/png;base64, {{ chart|safe }}" class="rounded">
+    </div>
+  {% endif %}
+
+  <!-- Доходы -->
+  <h2>Доходы</h2>
+  <table class="table table-striped table-hover table-bordered" >
+    <thead>
+      <tr>
+        <th scope="col">Категория</th>
+        <th scope="col">Сумма</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if incomes.exists %}
+        {% for income in incomes %}
+          <tr>
+            <td>{{ income.categories.name }}</td>
+            <td>{{ income.sum }}</td>
+          </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td colspan="3">
+            <div class="text-center">
+              Нет доходов
+            </div>
+          </td>
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
+  {% include 'accounts/includes/create_income.html' %}
+  {% include 'accounts/includes/edit_income.html' %}
+  <hr>
+
+  <!-- Расходы -->
+  <h2>Расходы</h2>
+  <table class="table table-striped table-hover table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Категория</th>
+        <th scope="col">План</th>
+        <th scope="col">Сумма</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if expenses.exists %}
+        {% for expense in expenses %}
+          <tr>
+            <td>{{ expense.categories.name }}</td>
+            <td>{{ expense.plan }}</td>
+            <td>{{ expense.sum }}</td>
+          </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td colspan="4">
+            <div class="text-center">
+              Нет расходов
+            </div>
+          </td>
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
+  {% include 'accounts/includes/create_expense.html' %}
+  {% include 'accounts/includes/edit_expense.html' %}
+
+  <script>
+    window.onload = (event) => {
+      let myAlert = document.querySelectorAll('.toast')[0];
+      if (myAlert) {
+        let bsAlert = new bootstrap.Toast(myAlert);
+        bsAlert.show();
+      }
+    };
+  </script>
+{% endblock %}

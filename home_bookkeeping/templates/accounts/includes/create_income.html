@@ -1,0 +1,56 @@
+<!-- templates/accounts/includes/create_income.html -->
+{% if form_income.errors %}
+  {% for error in form_income.non_field_errors %}
+    <div class="position-absolute top-0 start-50 translate-middle-x">
+      <div class="toast text-white bg-danger " role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body">
+            {{ error|escape }}
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Закрыть"></button>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+{% endif %}
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#incomeModal">Добавить доход</button>
+
+<div class="modal fade" id="incomeModal" tabindex="-1" aria-labelledby="incomeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <!-- header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="incomeModalLabel">Добавление нового дохода</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <!-- body -->
+      <div class="modal-body">
+        <form id="form_income_id" method="post" action="{% url 'accounts:create_income' accounting.id %}">
+          {% csrf_token %}
+          <div class="row g-3">
+            <!-- categories -->
+            <div class="col-sm-7">
+              <div class="input-group">
+                <span class="input-group-text">Категория</span>
+                {{ form_income.categories }}
+              </div>
+            </div>
+            <!-- sum -->
+            <div class="col-sm">
+              <div class="input-group">
+                {{ form_income.sum }}
+                <span class="input-group-text">₽</span>
+              </div>
+            </div>
+          </div><!-- row -->
+        </form>
+      </div>
+      <!-- footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        <button type="submit" class="btn btn-primary"  form="form_income_id">Добавить</button>
+      </div>  
+    </div>
+  </div>
+</div>

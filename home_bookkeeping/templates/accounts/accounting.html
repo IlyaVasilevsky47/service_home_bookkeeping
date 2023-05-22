@@ -1,0 +1,55 @@
+<!-- templates/accounts/index.html -->
+{% extends 'base.html' %}
+{% block title %}Домашняя бухгалтерия{% endblock %}
+{% block content %}
+  {% load subtraction %}
+  <h1 class="text-center">Домашняя бухгалтерия</h1>
+  <hr>
+  <table class="table table-striped table-hover table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Год</th>
+        <th scope="col">Месяц</th>
+        <th scope="col">Доход</th>
+        <th scope="col">Расход</th>
+        <th scope="col">Разница</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if accountings.exists %}
+        {% for accounting in page_obj %}
+          <tr>
+            <td>{{ accounting.year }}</td>
+            <td>
+              <a href="{% url 'accounts:accounting_detail' accounting.id %}">
+                {{ accounting.month }}
+              </a>
+            </td>
+            {% if not accounting.incomes_sum  %}
+              <td>Нет доходов</td>
+            {% else %}
+              <td>{{ accounting.incomes_sum }}</td>
+            {% endif %}
+            {% if not accounting.expense_sum  %}
+              <td>Нет расходов</td>
+            {% else %}
+              <td>{{ accounting.expense_sum }}</td>
+            {% endif %}
+            <td>{{ accounting.incomes_sum|subtract:accounting.expense_sum }}</td>
+          </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td colspan="5">
+            <div class="text-center">
+              Нет данных
+            </div>
+          </td>
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
+  {% include 'accounts/includes/create_accounting.html' %}
+  <!-- Пагинатор -->
+  {% include 'accounts/includes/paginator.html' %}
+{% endblock %}

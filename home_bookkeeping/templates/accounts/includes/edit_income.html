@@ -1,0 +1,53 @@
+<!-- templates/accounts/includes/edit_income.html -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#incomeDataModal">Редактировать доходы</button>
+
+<div class="modal fade" id="incomeDataModal" tabindex="-1" aria-labelledby="incomeDataModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <!-- header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="incomeDataModalLabel">Редактирование доходов</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <!-- body -->
+      <div class="modal-body">
+        <div class="row g-2">
+          {% for income_data in form_income_data %}
+            <!-- edit -->
+            <form id="form_income_edit_{{ income_data.instance.pk }}" method="post" action="{% url 'accounts:edit_income' accounting.id income_data.instance.pk %}" class="row g-1">
+              {% csrf_token %}
+              <!-- categories -->
+              <div class="col-sm-7">
+                <div class="input-group">
+                  <span class="input-group-text">Категория</span>
+                  <input class="form-control" placeholder="{{ income_data.instance }}" aria-label="readonly input example" readonly>
+                </div>
+              </div>
+              <!-- sum -->
+              <div class="col-sm">
+                <div class="input-group">
+                  {{ income_data.sum }}
+                  <span class="input-group-text">₽</span>
+                </div>
+              </div>
+            </form>
+            <!-- delete -->
+            <form id="form_income_delet_{{ income_data.instance.pk }}" method="post" action="{% url 'accounts:delte_income' accounting.id income_data.instance.pk %}">
+              {% csrf_token %}
+            </form>
+            <!-- actions -->
+            <div class="d-grid gap-3 d-md-flex justify-content-md-end">
+              <button type="submit" class="btn btn-primary" form="form_income_delet_{{ income_data.instance.pk }}">Удалить</button>
+              <button type="submit" class="btn btn-primary" form="form_income_edit_{{ income_data.instance.pk }}">Сохранить</button>
+            </div>
+            <hr>
+          {% endfor %}
+        </div><!-- row -->
+        <!-- footer -->
+        <div class="d-grid gap-1 col-2 mx-auto">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

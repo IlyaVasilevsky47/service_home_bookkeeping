@@ -1,0 +1,62 @@
+<!-- templates/accounts/includes/create_accounting.html -->
+{% if form.errors %}
+  {% for error in form.non_field_errors %}
+    <div class="position-absolute top-0 start-50 translate-middle-x">
+      <div class="toast text-white bg-danger " role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body">
+            {{ error|escape }}
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Закрыть"></button>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+{% endif %}
+
+<script>
+  window.onload = (event) => {
+    let myAlert = document.querySelectorAll('.toast')[0];
+    if (myAlert) {
+      let bsAlert = new bootstrap.Toast(myAlert);
+      bsAlert.show();
+    }
+  };
+</script>
+
+<div class="d-grid gap-2 col-6 mx-auto">
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Добавить</button>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Добавление нового месяца</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <!-- body -->
+      <div class="modal-body">
+        <form id="form_id" method="post" action="{% url 'accounts:accounting' %}">
+          {% csrf_token %}
+          <!-- year -->
+          <label for="{{ form.group.id_for_label }}">
+            {{ form.year.label }}:
+          </label>
+          {{ form.year }}
+          <!-- month -->
+          <label for="{{ form.group.id_for_label }}">
+            {{ form.month.label }}:
+          </label>
+          {{ form.month }}
+        </form>
+      </div>
+      <!-- footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        <button type="submit" class="btn btn-primary"  form="form_id">Добавить дату</button>
+      </div>
+    </div>
+  </div>
+</div>
