@@ -43,7 +43,6 @@ jobs:
             key: ${{ secrets.SSH_KEY }}
             passphrase: ${{ secrets.PASSPHRASE }}
             script: |
-              cd home-bookkeeping/
               sudo docker-compose stop
               sudo docker-compose rm web
               sudo docker-compose up -d
