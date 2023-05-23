@@ -9,7 +9,7 @@ services:
       - .env
 
   web:
-    build: ../home_bookkeeping/
+    image: ilya047/home_bookkeeping:v1.00.2023
     restart: always
     volumes:
       - static_value:/app/static/
