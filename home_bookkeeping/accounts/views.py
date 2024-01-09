@@ -25,9 +25,8 @@ def accounting(request):
         incomes_sum=Sum('calculation_incomes__sum', distinct=True),
         expense_sum=Sum('calculation_expense__sum'),
     )
-    paginator = Paginator(accountings, LIMIT)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+
+    page_obj = Paginator(accountings, LIMIT).get_page(request.GET.get('page'))
 
     form = AccountingForm(request.POST or None, initial={'user': request.user})
     if form.is_valid():
