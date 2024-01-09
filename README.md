@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/IlyaVasilevsky47/service_home_bookkeeping/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/IlyaVasilevsky47/service_home_bookkeeping/actions/workflows/main.yml)
 
-![Screenshot](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+![Screenshot](https://github.com/IlyaVasilevsky47/service_home_bookkeeping/blob/main/readme_img/website.jpg?raw=true)
 
 Service_home_bookkeeping - это удобный сервис для домашней бухгалтерии, который помогает вести личный или семейный бюджет. В недавнем прошлом многие вели бухгалтерию своих домашних финансов в тетрадях или блокнотах, но сегодня большинство людей используют для этого веб-сервисы.
 
