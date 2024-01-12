@@ -1,4 +1,4 @@
-# Service_home_bookkeeping
+# Service-home-bookkeeping
 
 [![CI](https://github.com/IlyaVasilevsky47/service_home_bookkeeping/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/IlyaVasilevsky47/service_home_bookkeeping/actions/workflows/main.yml)
 
