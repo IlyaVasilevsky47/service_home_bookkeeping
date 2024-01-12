@@ -77,6 +77,7 @@ docker-compose exec web python manage.py collectstatic --no-input
 
 ## Автор:
 - Василевский И.А.
+- [GitHub](https://github.com/IlyaVasilevsky47)
 - [Почта](vasilevskijila047@gmail.com)
 - [Вконтакте](https://vk.com/ilya.vasilevskiy47)
 
