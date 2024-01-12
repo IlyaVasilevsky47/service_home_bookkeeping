@@ -47,7 +47,7 @@ python manage.py runserver
 ```
 
 ## Настройка .env:
-```
+```conf
 DB_ENGINE=django.db.backends.postgresql
 DB_NAME=postgres
 POSTGRES_USER=postgres
