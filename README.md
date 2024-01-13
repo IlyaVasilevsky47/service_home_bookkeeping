@@ -62,7 +62,7 @@ DB_PORT=5432
 cd infra
 docker-compose up -d
 ```
-2. Создаем базу данных
+2. Создаем базу данных.
 ```bash
 docker-compose exec web python manage.py migrate
 ```
